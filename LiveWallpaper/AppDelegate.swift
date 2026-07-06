@@ -6,11 +6,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
     private let lastVideoKey = "LiveWallpaper.lastVideoURL"
     private let mutedKey = "LiveWallpaper.muted"
+    private let pingPongKey = "LiveWallpaper.pingPong"
+    private let loopKey = "LiveWallpaper.loopPlayback"
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.accessory)
 
         engine.isMuted = UserDefaults.standard.object(forKey: mutedKey) as? Bool ?? true
+        engine.loopPlayback = UserDefaults.standard.object(forKey: loopKey) as? Bool ?? true
+        engine.pingPongMode = UserDefaults.standard.object(forKey: pingPongKey) as? Bool ?? true
 
         buildStatusItem()
 
@@ -40,14 +44,24 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         let settingsMenu = NSMenu()
 
-        let chooseVideoItem = NSMenuItem(title: Localized.string("menu.chooseVideo"), action: #selector(chooseVideo), keyEquivalent: "o")
+        let chooseVideoItem = NSMenuItem(title: Localized.string("menu.chooseVideo"), action: #selector(chooseVideo), keyEquivalent: "") // 快捷鍵已注釋: "o"
         chooseVideoItem.target = self
         settingsMenu.addItem(chooseVideoItem)
 
-        let muteItem = NSMenuItem(title: Localized.string("menu.muted"), action: #selector(toggleMute), keyEquivalent: "m")
+        let muteItem = NSMenuItem(title: Localized.string("menu.muted"), action: #selector(toggleMute), keyEquivalent: "") // 快捷鍵已注釋: "m"
         muteItem.target = self
         muteItem.state = engine.isMuted ? .on : .off
         settingsMenu.addItem(muteItem)
+
+        let loopItem = NSMenuItem(title: Localized.string("menu.loopPlayback"), action: #selector(toggleLoop), keyEquivalent: "") // 快捷鍵已注釋: "r"
+        loopItem.target = self
+        loopItem.state = engine.loopPlayback ? .on : .off
+        settingsMenu.addItem(loopItem)
+
+        let pingPongItem = NSMenuItem(title: Localized.string("menu.pingPong"), action: #selector(togglePingPong), keyEquivalent: "") // 快捷鍵已注釋: "l"
+        pingPongItem.target = self
+        pingPongItem.state = engine.pingPongMode ? .on : .off
+        settingsMenu.addItem(pingPongItem)
 
         let languageMenu = NSMenu()
         let supportedLanguages = [("en", "English"), ("zh-hk", "繁體中文")]
@@ -68,13 +82,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(settingsMenuItem)
 
         if engine.isPlaying {
-            menu.addItem(withTitle: Localized.string("menu.pauseResume"), action: #selector(togglePause), keyEquivalent: "p").target = self
-            menu.addItem(withTitle: Localized.string("menu.stopWallpaper"), action: #selector(stopWallpaper), keyEquivalent: "s").target = self
+            menu.addItem(withTitle: Localized.string("menu.pauseResume"), action: #selector(togglePause), keyEquivalent: "").target = self // 快捷鍵已注釋: "p"
+            menu.addItem(withTitle: Localized.string("menu.stopWallpaper"), action: #selector(stopWallpaper), keyEquivalent: "").target = self // 快捷鍵已注釋: "s"
         }
 
         menu.addItem(.separator())
 
-        menu.addItem(withTitle: Localized.string("menu.quit"), action: #selector(quit), keyEquivalent: "q").target = self
+        menu.addItem(withTitle: Localized.string("menu.quit"), action: #selector(quit), keyEquivalent: "").target = self // 快捷鍵已注釋: "q"
 
         statusItem.menu = menu
     }
@@ -106,6 +120,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     @objc private func toggleMute() {
         engine.isMuted.toggle()
         UserDefaults.standard.set(engine.isMuted, forKey: mutedKey)
+        refreshMenu()
+    }
+
+    @objc private func togglePingPong() {
+        engine.pingPongMode.toggle()
+        UserDefaults.standard.set(engine.pingPongMode, forKey: pingPongKey)
+        refreshMenu()
+    }
+
+    @objc private func toggleLoop() {
+        engine.setLoopPlayback(!engine.loopPlayback)
+        UserDefaults.standard.set(engine.loopPlayback, forKey: loopKey)
         refreshMenu()
     }
 

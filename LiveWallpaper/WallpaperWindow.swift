@@ -19,7 +19,7 @@ final class WallpaperWindow: NSWindow {
         self.isReleasedWhenClosed = false
         self.setFrame(screen.frame, display: true)
 
-        playerView.frame = self.contentRect(forFrameRect: self.frame)
+        playerView.frame = CGRect(origin: .zero, size: screen.frame.size)
         playerView.autoresizingMask = [.width, .height]
         playerView.controlsStyle = .none
         playerView.videoGravity = .resizeAspectFill
@@ -32,5 +32,6 @@ final class WallpaperWindow: NSWindow {
 
     func updateFrame(to screen: NSScreen) {
         self.setFrame(screen.frame, display: true)
+        playerView.frame = CGRect(origin: .zero, size: screen.frame.size)
     }
 }

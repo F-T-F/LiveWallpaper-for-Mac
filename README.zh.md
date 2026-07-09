@@ -24,7 +24,8 @@
 
 2. 透過選單列（Menu Bar）控制所有功能
 
-<img width="540" height="251" alt="x" src="https://github.com/user-attachments/assets/533bd220-7e90-42c5-81cd-bb5e04e6bacd" />
+<img width="271" height="190" alt="螢幕截圖 2026-07-10 04 14 00" src="https://github.com/user-attachments/assets/4c4d03bd-880b-4f00-84d7-afe7cc336bde" />
+
 
 <hr>
 

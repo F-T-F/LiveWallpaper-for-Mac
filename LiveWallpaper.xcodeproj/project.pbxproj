@@ -12,6 +12,7 @@
 		7A2129D52FFB8AE300A0221E /* WallpaperEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2129D22FFB8AE300A0221E /* WallpaperEngine.swift */; };
 		7A2129D62FFB8AE300A0221E /* WallpaperWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2129D32FFB8AE300A0221E /* WallpaperWindow.swift */; };
 		7AB9F4402FFACC3C0010453F /* Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9F43F2FFACC3C0010453F /* Localized.swift */; };
+		7AF5F2282FFF851B00099FEC /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AF5F2272FFF851B00099FEC /* Media.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		7A2129D22FFB8AE300A0221E /* WallpaperEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperEngine.swift; sourceTree = "<group>"; };
 		7A2129D32FFB8AE300A0221E /* WallpaperWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperWindow.swift; sourceTree = "<group>"; };
 		7AB9F43F2FFACC3C0010453F /* Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localized.swift; sourceTree = "<group>"; };
+		7AF5F2272FFF851B00099FEC /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +39,7 @@
 		1A0000000000000000000004 = {
 			isa = PBXGroup;
 			children = (
+				7AF5F2272FFF851B00099FEC /* Media.xcassets */,
 				1A0000000000000000000006 /* LiveWallpaper */,
 				1A0000000000000000000005 /* Products */,
 				7AB9F43F2FFACC3C0010453F /* Localized.swift */,
@@ -120,6 +123,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AF5F2282FFF851B00099FEC /* Media.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,17 +192,20 @@
 		1A000000000000000000000B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = LiveWallpaper;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.local.LiveWallpaper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -209,17 +216,20 @@
 		1A000000000000000000000C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = LiveWallpaper;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.local.LiveWallpaper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -15,10 +15,13 @@ enum Localized {
             "menu.muted": "Muted",
             "menu.loopPlayback": "Loop Playback",
             "menu.pingPong": "Ping-Pong Loop",
+            "menu.launchAtLogin": "Launch at Login",
+            "menu.launchAtLoginUnsupported": "Launch at Login (macOS 13+)",
             "menu.language": "Language",
             "menu.quit": "Quit",
             "panel.setAsWallpaper": "Set as Wallpaper",
             "menu.settings": "Setting",
+            "alert.launchAtLoginFailed": "Could not update login item",
         ],
         "zh-hk": [
             "menu.noWallpaper": "沒有桌布",
@@ -29,10 +32,13 @@ enum Localized {
             "menu.muted": "靜音",
             "menu.loopPlayback": "循環播放",
             "menu.pingPong": "來回播放",
+            "menu.launchAtLogin": "開機自動啟動",
+            "menu.launchAtLoginUnsupported": "開機自動啟動（macOS 13+）",
             "menu.language": "語言",
             "menu.quit": "結束",
             "panel.setAsWallpaper": "設為桌布",
             "menu.settings": "設置",
+            "alert.launchAtLoginFailed": "無法更新開機自動啟動",
         ],
     ]
 

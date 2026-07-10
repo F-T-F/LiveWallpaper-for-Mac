@@ -1,4 +1,5 @@
 import Cocoa
+import ServiceManagement
 import UniformTypeIdentifiers
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
@@ -62,6 +63,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         pingPongItem.target = self
         pingPongItem.state = engine.pingPongMode ? .on : .off
         settingsMenu.addItem(pingPongItem)
+
+        let launchAtLoginItem = NSMenuItem(title: launchAtLoginMenuTitle(), action: #selector(toggleLaunchAtLogin), keyEquivalent: "")
+        launchAtLoginItem.target = self
+        launchAtLoginItem.state = launchAtLoginMenuState()
+        launchAtLoginItem.isEnabled = launchAtLoginSupported()
+        settingsMenu.addItem(launchAtLoginItem)
 
         let languageMenu = NSMenu()
         let supportedLanguages = [("en", "English"), ("zh-hk", "繁體中文")]
@@ -133,6 +140,55 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         engine.setLoopPlayback(!engine.loopPlayback)
         UserDefaults.standard.set(engine.loopPlayback, forKey: loopKey)
         refreshMenu()
+    }
+
+    @objc private func toggleLaunchAtLogin() {
+        guard #available(macOS 13.0, *) else { return }
+
+        do {
+            if SMAppService.mainApp.status == .enabled {
+                try SMAppService.mainApp.unregister()
+            } else {
+                try SMAppService.mainApp.register()
+            }
+        } catch {
+            showLaunchAtLoginError(error)
+        }
+
+        refreshMenu()
+    }
+
+    private func launchAtLoginSupported() -> Bool {
+        if #available(macOS 13.0, *) { return true }
+        return false
+    }
+
+    private func launchAtLoginMenuTitle() -> String {
+        if launchAtLoginSupported() {
+            return Localized.string("menu.launchAtLogin")
+        }
+        return Localized.string("menu.launchAtLoginUnsupported")
+    }
+
+    private func launchAtLoginMenuState() -> NSControl.StateValue {
+        guard #available(macOS 13.0, *) else { return .off }
+
+        switch SMAppService.mainApp.status {
+        case .enabled:
+            return .on
+        case .requiresApproval:
+            return .mixed
+        default:
+            return .off
+        }
+    }
+
+    private func showLaunchAtLoginError(_ error: Error) {
+        let alert = NSAlert()
+        alert.messageText = Localized.string("alert.launchAtLoginFailed")
+        alert.informativeText = error.localizedDescription
+        alert.alertStyle = .warning
+        alert.runModal()
     }
 
     @objc private func screensChanged() {
